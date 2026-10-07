@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demand Forecasting & Capacity Planning</title>
+    <title>Demand Forecasting & Capacity Planning Command Center</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
@@ -49,14 +49,18 @@
 
     <!-- Navigation Tabs -->
     <div class="bg-white border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8">
-            <button onclick="switchTab('demand')" id="tabDemand" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8 overflow-x-auto">
+            <button onclick="switchTab('demand')" id="tabDemand" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2 whitespace-nowrap">
                 <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
                 <span>Demand Forecasting & Capacity</span>
             </button>
-            <button onclick="switchTab('resource')" id="tabResource" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2">
+            <button onclick="switchTab('resource')" id="tabResource" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap">
                 <i data-lucide="users" class="w-4 h-4"></i>
                 <span>Resource Planning & Allocation</span>
+            </button>
+            <button onclick="switchTab('lifecycle')" id="tabLifecycle" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap">
+                <i data-lucide="git-branch" class="w-4 h-4"></i>
+                <span>Lifecycle & Transition Management</span>
             </button>
         </div>
     </div>
@@ -66,7 +70,6 @@
 
         <!-- TAB 1: Demand Forecasting & Capacity -->
         <div id="contentDemand" class="space-y-8">
-            <!-- KPI Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="glass-card p-6 rounded-2xl shadow-sm">
                     <div class="flex items-center justify-between">
@@ -117,7 +120,6 @@
                 </div>
             </div>
 
-            <!-- Charts & Deficit Breakdown -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="glass-card p-6 rounded-2xl shadow-sm lg:col-span-2 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-4">
@@ -186,7 +188,6 @@
                 </div>
             </div>
 
-            <!-- Detailed Engineer Table (142 FTEs) -->
             <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
@@ -210,7 +211,6 @@
                             </tr>
                         </thead>
                         <tbody id="tableBody" class="divide-y divide-slate-100 text-slate-700">
-                            <!-- Dynamically populated via JS -->
                         </tbody>
                     </table>
                 </div>
@@ -219,7 +219,6 @@
 
         <!-- TAB 2: Resource Planning & Allocation -->
         <div id="contentResource" class="space-y-8 hidden">
-            <!-- Resource KPI Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="glass-card p-6 rounded-2xl shadow-sm">
                     <div class="flex items-center justify-between">
@@ -270,7 +269,6 @@
                 </div>
             </div>
 
-            <!-- Resource Visibility & Dynamic Allocation Matrix -->
             <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
@@ -294,7 +292,88 @@
                             </tr>
                         </thead>
                         <tbody id="resourceTableBody" class="divide-y divide-slate-100 text-slate-700">
-                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: Lifecycle & Transition Management -->
+        <div id="contentLifecycle" class="space-y-8 hidden">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Global Workforce Tracked</span>
+                        <span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="database" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">500+</div>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">Employees & Contractors</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Real-time master DB via Python, SQL & Sheets API</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Onboarding / Offboarding SOP</span>
+                        <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">100%</div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Closed-Loop</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Automated IT & HR asset/access verification</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Stage-Gate Transition Active</span>
+                        <span class="p-2 bg-blue-50 text-blue-600 rounded-xl"><i data-lucide="git-merge" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">38</div>
+                        <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Jira Workflows</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Seamless Project A to Project B handoffs</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Transition Gap Efficiency</span>
+                        <span class="p-2 bg-purple-50 text-purple-600 rounded-xl"><i data-lucide="clock" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">0 Days</div>
+                        <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">Zero Idle Time</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Eliminated personnel idling and handover delays</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">Global Personnel Master DB & Stage-Gate Transition Tracker (500+ Records)</h3>
+                        <p class="text-xs text-slate-500">Python/SQL & Sheets API automated tracking of contracts, skill tags, project bindings, and transition periods</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto">
+                        <input type="text" id="searchLifecycleInput" onkeyup="filterLifecycleTable()" placeholder="Search staff name, status, or stage..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64">
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table id="lifecycleTable" class="w-full text-left border-collapse text-xs">
+                        <thead class="sticky top-0 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider z-10">
+                            <tr>
+                                <th class="py-3 px-6">Staff Name</th>
+                                <th class="py-3 px-6">Role / Skill Tag</th>
+                                <th class="py-3 px-6">Current Binding</th>
+                                <th class="py-3 px-6">Contract Expiry</th>
+                                <th class="py-3 px-6">Transition Stage (Jira)</th>
+                                <th class="py-3 px-6">SOP Compliance Status</th>
+                                <th class="py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lifecycleTableBody" class="divide-y divide-slate-100 text-slate-700">
                         </tbody>
                     </table>
                 </div>
@@ -316,27 +395,34 @@
     <script>
         lucide.createIcons();
 
-        // Tab Switching Logic
         function switchTab(tab) {
             const tabDemand = document.getElementById('tabDemand');
             const tabResource = document.getElementById('tabResource');
+            const tabLifecycle = document.getElementById('tabLifecycle');
             const contentDemand = document.getElementById('contentDemand');
             const contentResource = document.getElementById('contentResource');
+            const contentLifecycle = document.getElementById('contentLifecycle');
+
+            tabDemand.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap";
+            tabResource.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap";
+            tabLifecycle.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap";
+
+            contentDemand.classList.add('hidden');
+            contentResource.classList.add('hidden');
+            contentLifecycle.classList.add('hidden');
 
             if (tab === 'demand') {
-                tabDemand.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2";
-                tabResource.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2";
+                tabDemand.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2 whitespace-nowrap";
                 contentDemand.classList.remove('hidden');
-                contentResource.classList.add('hidden');
-            } else {
-                tabResource.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2";
-                tabDemand.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2";
+            } else if (tab === 'resource') {
+                tabResource.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2 whitespace-nowrap";
                 contentResource.classList.remove('hidden');
-                contentDemand.classList.add('hidden');
+            } else if (tab === 'lifecycle') {
+                tabLifecycle.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2 whitespace-nowrap";
+                contentLifecycle.classList.remove('hidden');
             }
         }
 
-        // Chart.js
         const ctx = document.getElementById('demandCapacityChart').getContext('2d');
         const demandCapacityChart = new Chart(ctx, {
             type: 'bar',
@@ -368,7 +454,6 @@
             }
         });
 
-        // 142 FTE Data Generation for Tab 1
         const firstNames = ["Alex", "Brian", "Chloe", "David", "Elena", "Frank", "Grace", "Herman", "Ivy", "Jack", "Kevin", "Linda", "Michael", "Nancy", "Oliver", "Peter", "Queen", "Ryan", "Sarah", "Tom"];
         const lastNames = ["K.", "L.", "W.", "T.", "S.", "M.", "G.", "H.", "I.", "J.", "Chen", "Wang", "Lee", "Zhang", "Lin", "Liu", "Wu", "Huang", "Davis", "Smith"];
         const techStacks = [
@@ -383,6 +468,8 @@
             "Transition to Web3 DEX Core", "Internal Training for Project A", "Support Distributed Systems", "Retain / Mentor Juniors", "High-Frequency Trading Architect", "Next-Gen Distributed Support"
         ];
         const dates = ["2026/10/30", "2026/11/10", "2026/11/15", "2026/11/30", "2026/12/01", "2026/12/15", "2027/01/15"];
+        const stages = ["Stage 1: Handoff Initiated", "Stage 2: Knowledge Transfer", "Stage 3: Asset & Access Audit", "Stage 4: Seamlessly Re-assigned"];
+        const expiryDates = ["2027/06/30", "2027/12/31", "2028/03/15", "2026/11/30", "2027/09/10"];
 
         let engineers = [];
         for (let i = 1; i <= 142; i++) {
@@ -406,7 +493,30 @@
                 recommendation: rec,
                 workload: `${Math.floor(75 + (i * 13) % 25)}%`,
                 status: i % 10 === 0 ? "Bench / In Gap" : "Active Assigned",
-                target: i % 10 === 0 ? "High-Priority Delivery Line" : "Current Stream"
+                target: i % 10 === 0 ? "High-Priority Delivery Line" : "Current Stream",
+                expiry: expiryDates[i % expiryDates.length],
+                stage: stages[i % stages.length],
+                sop: "100% Closed-Loop"
+            });
+        }
+
+        let lifecycleStaff = [];
+        for (let i = 1; i <= 500; i++) {
+            let fn = firstNames[i % firstNames.length];
+            let ln = lastNames[(i * 7) % lastNames.length];
+            let ts = techStacks[i % techStacks.length];
+            let prj = projects[i % projects.length];
+            let initials = fn[0] + ln[0];
+
+            lifecycleStaff.push({
+                name: `${fn} ${ln} (Staff #${i})`,
+                initials: initials,
+                stack: ts.name,
+                stackClass: ts.bg,
+                project: prj,
+                expiry: expiryDates[i % expiryDates.length],
+                stage: stages[i % stages.length],
+                sop: "100% Closed-Loop Verified"
             });
         }
 
@@ -460,8 +570,35 @@
             });
         }
 
+        function renderLifecycleTable(data) {
+            const tbody = document.getElementById('lifecycleTableBody');
+            tbody.innerHTML = '';
+            data.slice(0, 100).forEach(staff => {
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">${staff.initials}</span>
+                        <span>${staff.name}</span>
+                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 ${staff.stackClass} rounded-lg font-medium">${staff.stack}</span></td>
+                    <td class="py-4 px-6 font-medium text-slate-700">${staff.project}</td>
+                    <td class="py-4 px-6 mono text-slate-500">${staff.expiry}</td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full font-semibold">${staff.stage}</span></td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-medium">${staff.sop}</span></td>
+                    <td class="py-4 px-6">
+                        <button onclick="auditLifecycle('${staff.name}')" class="px-3 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Audit Workflow
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
         renderTable(engineers);
         renderResourceTable(engineers);
+        renderLifecycleTable(lifecycleStaff);
 
         function filterTable() {
             const input = document.getElementById('searchInput');
@@ -485,8 +622,23 @@
             renderResourceTable(filtered);
         }
 
+        function filterLifecycleTable() {
+            const input = document.getElementById('searchLifecycleInput');
+            const filter = input.value.toLowerCase();
+            const filtered = lifecycleStaff.filter(staff => 
+                staff.name.toLowerCase().includes(filter) || 
+                staff.stack.toLowerCase().includes(filter) ||
+                staff.stage.toLowerCase().includes(filter)
+            );
+            renderLifecycleTable(filtered);
+        }
+
         function deployEngineer(name) {
             alert(`[Dynamic Reallocation Success]: ${name} has been successfully re-deployed to high-priority delivery stream with zero down-time.`);
+        }
+
+        function auditLifecycle(name) {
+            alert(`[Stage-Gate Audit]: ${name} workflow verified via Jira & Sheets API. Onboarding/Offboarding SOP closed-loop compliance at 100%.`);
         }
 
         function runAiSimulation() {
