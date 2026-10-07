@@ -66,6 +66,10 @@
                 <i data-lucide="shield-alert" class="w-4 h-4"></i>
                 <span>Governance & Metrics</span>
             </button>
+            <button onclick="switchTab('financial')" id="tabFinancial" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap">
+                <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+                <span>Financial & Invoicing Operations</span>
+            </button>
         </div>
     </div>
 
@@ -386,7 +390,6 @@
 
         <!-- TAB 4: Governance & Metrics -->
         <div id="contentGovernance" class="space-y-8 hidden">
-            <!-- Governance KPI Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="glass-card p-6 rounded-2xl shadow-sm">
                     <div class="flex items-center justify-between">
@@ -430,14 +433,13 @@
                         <span class="p-2 bg-rose-50 text-rose-600 rounded-xl"><i data-lucide="bell-ring" class="w-5 h-5"></i></span>
                     </div>
                     <div class="mt-4 flex items-baseline justify-between">
-                        <div class="text-3xl font-bold text-slate-900 mono">0 </div>
+                        <div class="text-3xl font-bold text-slate-900 mono">0</div>
                         <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Proactive Warning</span>
                     </div>
                     <p class="mt-2 text-xs text-slate-500">Prevented budget overruns and milestone delays</p>
                 </div>
             </div>
 
-            <!-- Executive Dashboard & Multi-Dimensional Data Matrix -->
             <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
@@ -468,6 +470,89 @@
             </div>
         </div>
 
+        <!-- TAB 5: Financial & Invoicing Operations -->
+        <div id="contentFinancial" class="space-y-8 hidden">
+            <!-- Financial KPI Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">SOW & PO Tracked</span>
+                        <span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="file-text" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">100%</div>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">Lifecycle Linked</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">All terms, PO limits & milestones synced with Jira</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Non-Billable Cost Control</span>
+                        <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">-28%</div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Optimized</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Excess internal capacity redirected to billable streams</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Monthly Invoicing On-Time</span>
+                        <span class="p-2 bg-blue-50 text-blue-600 rounded-xl"><i data-lucide="check-circle-2" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">99.5%</div>
+                        <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Automated SOP</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Milestones reconciled & submitted before month-end</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">AR Collections Cycle</span>
+                        <span class="p-2 bg-purple-50 text-purple-600 rounded-xl"><i data-lucide="dollar-sign" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">-14 Days</div>
+                        <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">Accelerated</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Zero disputes via automated progress verification</p>
+                </div>
+            </div>
+
+            <!-- Financial & Invoicing Tracking Table -->
+            <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">SOW, PO Limits & Monthly Invoicing Governance Dashboard</h3>
+                        <p class="text-xs text-slate-500">Automated tracking of statement of work, purchase orders, non-billable cost thresholds, and milestone billing</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto">
+                        <input type="text" id="searchFinancialInput" onkeyup="filterFinancialTable()" placeholder="Search client, SOW, or invoice status..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64">
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table id="financialTable" class="w-full text-left border-collapse text-xs">
+                        <thead class="sticky top-0 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider z-10">
+                            <tr>
+                                <th class="py-3 px-6">Client / Project (SOW Ref)</th>
+                                <th class="py-3 px-6">PO Limit & Allocated Budget</th>
+                                <th class="py-3 px-6">Non-Billable Cost Ratio</th>
+                                <th class="py-3 px-6">Milestone Reconciled</th>
+                                <th class="py-3 px-6">Monthly Invoice Status</th>
+                                <th class="py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financialTableBody" class="divide-y divide-slate-100 text-slate-700">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Toast -->
@@ -485,7 +570,7 @@
 
         // Tab Switching Logic
         function switchTab(tab) {
-            const tabs = ['demand', 'resource', 'lifecycle', 'governance'];
+            const tabs = ['demand', 'resource', 'lifecycle', 'governance', 'financial'];
             tabs.forEach(t => {
                 const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
                 const content = document.getElementById('content' + t.charAt(0).toUpperCase() + t.slice(1));
@@ -531,273 +616,4 @@
             }
         });
 
-        // 142 FTE Data Generation for Tab 1
-        const firstNames = ["Alex", "Brian", "Chloe", "David", "Elena", "Frank", "Grace", "Herman", "Ivy", "Jack", "Kevin", "Linda", "Michael", "Nancy", "Oliver", "Peter", "Queen", "Ryan", "Sarah", "Tom"];
-        const lastNames = ["K.", "L.", "W.", "T.", "S.", "M.", "G.", "H.", "I.", "J.", "Chen", "Wang", "Lee", "Zhang", "Lin", "Liu", "Wu", "Huang", "Davis", "Smith"];
-        const techStacks = [
-            { name: "Core Architecture", bg: "bg-indigo-50 text-indigo-600" },
-            { name: "Distributed Systems", bg: "bg-blue-50 text-blue-600" },
-            { name: "Data Engineering", bg: "bg-purple-50 text-purple-600" },
-            { name: "Frontend & Web3 UI", bg: "bg-emerald-50 text-emerald-600" }
-        ];
-        const maturities = ["L5 (Expert)", "L4 (Senior)", "L3 (Mid-Level)"];
-        const projects = ["Payment Gateway V2", "Order Matching Engine", "Risk Analytics Pipeline", "Institutional Dashboard", "Cross-Border Settlement", "API Gateway Service", "Smart Contract Auditor", "Liquidity Pool V3"];
-        const recommendations = [
-            "Transition to Web3 DEX Core", "Internal Training for Project A", "Support Distributed Systems", "Retain / Mentor Juniors", "High-Frequency Trading Architect", "Next-Gen Distributed Support"
-        ];
-        const dates = ["2026/10/30", "2026/11/10", "2026/11/15", "2026/11/30", "2026/12/01", "2026/12/15", "2027/01/15"];
-        const stages = ["Stage 1: Handoff Initiated", "Stage 2: Knowledge Transfer", "Stage 3: Asset & Access Audit", "Stage 4: Seamlessly Re-assigned"];
-        const expiryDates = ["2027/06/30", "2027/12/31", "2028/03/15", "2026/11/30", "2027/09/10"];
-
-        let engineers = [];
-        for (let i = 1; i <= 142; i++) {
-            let fn = firstNames[i % firstNames.length];
-            let ln = lastNames[(i * 3) % lastNames.length];
-            let ts = techStacks[i % techStacks.length];
-            let mat = maturities[i % maturities.length];
-            let prj = projects[i % projects.length];
-            let dt = dates[i % dates.length];
-            let rec = recommendations[i % recommendations.length];
-            let initials = fn[0] + ln[0];
-
-            engineers.push({
-                name: `${fn} ${ln}`,
-                initials: initials,
-                stack: ts.name,
-                stackClass: ts.bg,
-                maturity: mat,
-                project: prj,
-                date: dt,
-                recommendation: rec,
-                workload: `${Math.floor(75 + (i * 13) % 25)}%`,
-                status: i % 10 === 0 ? "Bench / In Gap" : "Active Assigned",
-                target: i % 10 === 0 ? "High-Priority Delivery Line" : "Current Stream",
-                expiry: expiryDates[i % expiryDates.length],
-                stage: stages[i % stages.length],
-                sop: "100% Closed-Loop"
-            });
-        }
-
-        let lifecycleStaff = [];
-        for (let i = 1; i <= 500; i++) {
-            let fn = firstNames[i % firstNames.length];
-            let ln = lastNames[(i * 7) % lastNames.length];
-            let ts = techStacks[i % techStacks.length];
-            let prj = projects[i % projects.length];
-            let initials = fn[0] + ln[0];
-
-            lifecycleStaff.push({
-                name: `${fn} ${ln} (Staff #${i})`,
-                initials: initials,
-                stack: ts.name,
-                stackClass: ts.bg,
-                project: prj,
-                expiry: expiryDates[i % expiryDates.length],
-                stage: stages[i % stages.length],
-                sop: "100% Closed-Loop Verified"
-            });
-        }
-
-        // Governance Data (24 Projects Monitored via Power BI & Jira)
-        let governanceProjects = [];
-        const healthStatuses = ["Healthy (On Track)", "Warning (Variance Alert)", "Critical (Delay Risk)"];
-        const riskTriggers = ["None", "Budget Variance > 10%", "Milestone Lagged 5 Days", "Utilization Rate < 75%"];
-        for (let i = 1; i <= 24; i++) {
-            let prjName = projects[i % projects.length] + ` (Hub #${i})`;
-            let health = i % 5 === 0 ? "Warning (Variance Alert)" : "Healthy (On Track)";
-            let burn = `${Math.floor(80 + (i * 3) % 18)}%`;
-            let deadline = dates[i % dates.length];
-            let util = `${Math.floor(85 + (i * 2) % 15)}%`;
-            let trigger = i % 5 === 0 ? "Budget Variance > 10% (Auto Alert)" : "None (Proactive)";
-
-            governanceProjects.push({
-                name: prjName,
-                health: health,
-                burn: burn,
-                deadline: deadline,
-                util: util,
-                trigger: trigger
-            });
-        }
-
-        function renderTable(data) {
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
-            data.forEach(eng => {
-                let tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/50 transition-colors";
-                tr.innerHTML = `
-                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
-                        <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">${eng.initials}</span>
-                        <span>${eng.name}</span>
-                    </td>
-                    <td class="py-4 px-6"><span class="px-2 py-1 ${eng.stackClass} rounded-lg font-medium">${eng.stack}</span></td>
-                    <td class="py-4 px-6"><span class="font-bold">${eng.maturity}</span></td>
-                    <td class="py-4 px-6">${eng.project}</td>
-                    <td class="py-4 px-6 mono text-slate-500">${eng.date}</td>
-                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-medium">${eng.recommendation}</span></td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function renderResourceTable(data) {
-            const tbody = document.getElementById('resourceTableBody');
-            tbody.innerHTML = '';
-            data.forEach(eng => {
-                let statusBadge = eng.status.includes("Bench") 
-                    ? '<span class="px-2 py-1 bg-amber-50 text-amber-700 rounded-full font-semibold">Bench / Gap Period</span>' 
-                    : '<span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">Active Assigned</span>';
-                
-                let tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/50 transition-colors";
-                tr.innerHTML = `
-                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
-                        <span class="w-7 h-7 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">${eng.initials}</span>
-                        <span>${eng.name}</span>
-                    </td>
-                    <td class="py-4 px-6"><span class="px-2 py-1 ${eng.stackClass} rounded-lg font-medium">${eng.stack}</span></td>
-                    <td class="py-4 px-6"><span class="mono font-bold text-slate-700">${eng.workload}</span></td>
-                    <td class="py-4 px-6">${statusBadge}</td>
-                    <td class="py-4 px-6"><span class="font-medium text-indigo-600">${eng.target}</span></td>
-                    <td class="py-4 px-6">
-                        <button onclick="deployEngineer('${eng.name}')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-medium transition-all">
-                            Deploy Now
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function renderLifecycleTable(data) {
-            const tbody = document.getElementById('lifecycleTableBody');
-            tbody.innerHTML = '';
-            data.slice(0, 100).forEach(staff => {
-                let tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/50 transition-colors";
-                tr.innerHTML = `
-                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
-                        <span class="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">${staff.initials}</span>
-                        <span>${staff.name}</span>
-                    </td>
-                    <td class="py-4 px-6"><span class="px-2 py-1 ${staff.stackClass} rounded-lg font-medium">${staff.stack}</span></td>
-                    <td class="py-4 px-6 font-medium text-slate-700">${staff.project}</td>
-                    <td class="py-4 px-6 mono text-slate-500">${staff.expiry}</td>
-                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full font-semibold">${staff.stage}</span></td>
-                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-medium">${staff.sop}</span></td>
-                    <td class="py-4 px-6">
-                        <button onclick="auditLifecycle('${staff.name}')" class="px-3 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-[11px] font-medium transition-all">
-                            Audit Workflow
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function renderGovernanceTable(data) {
-            const tbody = document.getElementById('governanceTableBody');
-            tbody.innerHTML = '';
-            data.forEach(proj => {
-                let healthBadge = proj.health.includes("Warning")
-                    ? '<span class="px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full font-semibold">Warning (Variance Alert)</span>'
-                    : '<span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full">Healthy (On Track)</span>';
-
-                let triggerBadge = proj.trigger.includes("Budget")
-                    ? '<span class="px-2 py-1 bg-rose-50 text-rose-700 rounded-full font-semibold">Budget Variance > 10% (Alert Sent)</span>'
-                    : '<span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">None (Proactive)</span>';
-
-                let tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/50 transition-colors";
-                tr.innerHTML = `
-                    <td class="py-4 px-6 font-semibold text-slate-900">${proj.name}</td>
-                    <td class="py-4 px-6">${healthBadge}</td>
-                    <td class="py-4 px-6 mono font-bold text-slate-700">${proj.burn}</td>
-                    <td class="py-4 px-6 mono text-slate-500">${proj.deadline}</td>
-                    <td class="py-4 px-6 mono font-bold text-indigo-600">${proj.util}</td>
-                    <td class="py-4 px-6">${triggerBadge}</td>
-                    <td class="py-4 px-6">
-                        <button onclick="viewPowerBiReport('${proj.name}')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-medium transition-all">
-                            Power BI Deep Dive
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        renderTable(engineers);
-        renderResourceTable(engineers);
-        renderLifecycleTable(lifecycleStaff);
-        renderGovernanceTable(governanceProjects);
-
-        function filterTable() {
-            const input = document.getElementById('searchInput');
-            const filter = input.value.toLowerCase();
-            const filtered = engineers.filter(eng => 
-                eng.name.toLowerCase().includes(filter) || 
-                eng.stack.toLowerCase().includes(filter) ||
-                eng.project.toLowerCase().includes(filter)
-            );
-            renderTable(filtered);
-        }
-
-        function filterResourceTable() {
-            const input = document.getElementById('searchResourceInput');
-            const filter = input.value.toLowerCase();
-            const filtered = engineers.filter(eng => 
-                eng.name.toLowerCase().includes(filter) || 
-                eng.stack.toLowerCase().includes(filter) ||
-                eng.status.toLowerCase().includes(filter)
-            );
-            renderResourceTable(filtered);
-        }
-
-        function filterLifecycleTable() {
-            const input = document.getElementById('searchLifecycleInput');
-            const filter = input.value.toLowerCase();
-            const filtered = lifecycleStaff.filter(staff => 
-                staff.name.toLowerCase().includes(filter) || 
-                staff.stack.toLowerCase().includes(filter) ||
-                staff.stage.toLowerCase().includes(filter)
-            );
-            renderLifecycleTable(filtered);
-        }
-
-        function filterGovernanceTable() {
-            const input = document.getElementById('searchGovernanceInput');
-            const filter = input.value.toLowerCase();
-            const filtered = governanceProjects.governanceProjects || governanceProjects.filter(proj =>
-                proj.name.toLowerCase().includes(filter) ||
-                proj.health.toLowerCase().includes(filter)
-            );
-            renderGovernanceTable(filtered);
-        }
-
-        function deployEngineer(name) {
-            alert(`[Dynamic Reallocation Success]: ${name} has been successfully re-deployed to high-priority delivery stream with zero down-time.`);
-        }
-
-        function auditLifecycle(name) {
-            alert(`[Stage-Gate Audit]: ${name} workflow verified via Jira & Sheets API. Onboarding/Offboarding SOP closed-loop compliance at 100%.`);
-        }
-
-        function viewPowerBiReport(name) {
-            alert(`[Power BI Executive Dashboard]: Loading multi-dimensional analytics for ${name}. Automated risk alerts and budget variance metrics synced.`);
-        }
-
-        function runAiSimulation() {
-            const toast = document.getElementById('simulationToast');
-            toast.classList.remove('translate-y-32', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-32', 'opacity-0');
-            }, 3500);
-        }
-
-        function openSkillUpskillingModal() {
-            alert("[AI Upskilling Plan]:\n1. To address the 12 FTE Distributed Systems deficit, the model recommends prioritizing 8 senior backend engineers for Rust/Go internal training.\n2. Estimated internal transition completion within 4 weeks, saving $120,000 in external recruitment & outsourcing costs.");
-        }
-    </script>
-</body>
-</html>
+        // 1
