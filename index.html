@@ -616,4 +616,330 @@
             }
         });
 
-        // 1
+        // 142 FTE Data Generation for Tab 1
+        const firstNames = ["Alex", "Brian", "Chloe", "David", "Elena", "Frank", "Grace", "Herman", "Ivy", "Jack", "Kevin", "Linda", "Michael", "Nancy", "Oliver", "Peter", "Queen", "Ryan", "Sarah", "Tom"];
+        const lastNames = ["K.", "L.", "W.", "T.", "S.", "M.", "G.", "H.", "I.", "J.", "Chen", "Wang", "Lee", "Zhang", "Lin", "Liu", "Wu", "Huang", "Davis", "Smith"];
+        const techStacks = [
+            { name: "Core Architecture", bg: "bg-indigo-50 text-indigo-600" },
+            { name: "Distributed Systems", bg: "bg-blue-50 text-blue-600" },
+            { name: "Data Engineering", bg: "bg-purple-50 text-purple-600" },
+            { name: "Frontend & Web3 UI", bg: "bg-emerald-50 text-emerald-600" }
+        ];
+        const maturities = ["L5 (Expert)", "L4 (Senior)", "L3 (Mid-Level)"];
+        const projects = ["Payment Gateway V2", "Order Matching Engine", "Risk Analytics Pipeline", "Institutional Dashboard", "Cross-Border Settlement", "API Gateway Service", "Smart Contract Auditor", "Liquidity Pool V3"];
+        const recommendations = [
+            "Transition to Web3 DEX Core", "Internal Training for Project A", "Support Distributed Systems", "Retain / Mentor Juniors", "High-Frequency Trading Architect", "Next-Gen Distributed Support"
+        ];
+        const dates = ["2026/10/30", "2026/11/10", "2026/11/15", "2026/11/30", "2026/12/01", "2026/12/15", "2027/01/15"];
+        const stages = ["Stage 1: Handoff Initiated", "Stage 2: Knowledge Transfer", "Stage 3: Asset & Access Audit", "Stage 4: Seamlessly Re-assigned"];
+        const expiryDates = ["2027/06/30", "2027/12/31", "2028/03/15", "2026/11/30", "2027/09/10"];
+
+        let engineers = [];
+        for (let i = 1; i <= 142; i++) {
+            let fn = firstNames[i % firstNames.length];
+            let ln = lastNames[(i * 3) % lastNames.length];
+            let ts = techStacks[i % techStacks.length];
+            let mat = maturities[i % maturities.length];
+            let prj = projects[i % projects.length];
+            let dt = dates[i % dates.length];
+            let rec = recommendations[i % recommendations.length];
+            let initials = fn[0] + ln[0];
+
+            engineers.push({
+                name: `${fn} ${ln}`,
+                initials: initials,
+                stack: ts.name,
+                stackClass: ts.bg,
+                maturity: mat,
+                project: prj,
+                date: dt,
+                recommendation: rec,
+                workload: `${Math.floor(75 + (i * 13) % 25)}%`,
+                status: i % 10 === 0 ? "Bench / In Gap" : "Active Assigned",
+                target: i % 10 === 0 ? "High-Priority Delivery Line" : "Current Stream",
+                expiry: expiryDates[i % expiryDates.length],
+                stage: stages[i % stages.length],
+                sop: "100% Closed-Loop"
+            });
+        }
+
+        let lifecycleStaff = [];
+        for (let i = 1; i <= 500; i++) {
+            let fn = firstNames[i % firstNames.length];
+            let ln = lastNames[(i * 7) % lastNames.length];
+            let ts = techStacks[i % techStacks.length];
+            let prj = projects[i % projects.length];
+            let initials = fn[0] + ln[0];
+
+            lifecycleStaff.push({
+                name: `${fn} ${ln} (Staff #${i})`,
+                initials: initials,
+                stack: ts.name,
+                stackClass: ts.bg,
+                project: prj,
+                expiry: expiryDates[i % expiryDates.length],
+                stage: stages[i % stages.length],
+                sop: "100% Closed-Loop Verified"
+            });
+        }
+
+        let governanceProjects = [];
+        for (let i = 1; i <= 24; i++) {
+            let prjName = projects[i % projects.length] + ` (Hub #${i})`;
+            let health = i % 5 === 0 ? "Warning (Variance Alert)" : "Healthy (On Track)";
+            let burn = `${Math.floor(80 + (i * 3) % 18)}%`;
+            let deadline = dates[i % dates.length];
+            let util = `${Math.floor(85 + (i * 2) % 15)}%`;
+            let trigger = i % 5 === 0 ? "Budget Variance > 10% (Auto Alert)" : "None (Proactive)";
+
+            governanceProjects.push({
+                name: prjName,
+                health: health,
+                burn: burn,
+                deadline: deadline,
+                util: util,
+                trigger: trigger
+            });
+        }
+
+        // Financial & Invoicing Data
+        let financialRecords = [];
+        const clients = ["Binance Tier-1", "OKX Global Hub", "Bybit Settlement", "BitMart Tech", "Deepcubation Labs", "Polygon Network", "Solana APAC", "Chainlink Node"];
+        for (let i = 1; i <= 30; i++) {
+            let clientName = clients[i % clients.length] + ` (SOW-2026-${100 + i})`;
+            let poLimit = `$${(150 + i * 25)},000 USD`;
+            let nonBillable = `${Math.floor(4 + (i * 2) % 8)}% (Controlled)`;
+            let milestone = i % 3 === 0 ? "Milestone 3 Reconciled" : "Milestone 2 Reconciled";
+            let invStatus = i % 4 === 0 ? "Submitted & Approved (On-Time)" : "Auto-Generated for Month-End";
+
+            financialRecords.push({
+                client: clientName,
+                po: poLimit,
+                nonBillable: nonBillable,
+                milestone: milestone,
+                status: invStatus
+            });
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            data.forEach(eng => {
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">${eng.initials}</span>
+                        <span>${eng.name}</span>
+                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 ${eng.stackClass} rounded-lg font-medium">${eng.stack}</span></td>
+                    <td class="py-4 px-6"><span class="font-bold">${eng.maturity}</span></td>
+                    <td class="py-4 px-6">${eng.project}</td>
+                    <td class="py-4 px-6 mono text-slate-500">${eng.date}</td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-medium">${eng.recommendation}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderResourceTable(data) {
+            const tbody = document.getElementById('resourceTableBody');
+            tbody.innerHTML = '';
+            data.forEach(eng => {
+                let statusBadge = eng.status.includes("Bench") 
+                    ? '<span class="px-2 py-1 bg-amber-50 text-amber-700 rounded-full font-semibold">Bench / Gap Period</span>' 
+                    : '<span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">Active Assigned</span>';
+                
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">${eng.initials}</span>
+                        <span>${eng.name}</span>
+                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 ${eng.stackClass} rounded-lg font-medium">${eng.stack}</span></td>
+                    <td class="py-4 px-6"><span class="mono font-bold text-slate-700">${eng.workload}</span></td>
+                    <td class="py-4 px-6">${statusBadge}</td>
+                    <td class="py-4 px-6"><span class="font-medium text-indigo-600">${eng.target}</span></td>
+                    <td class="py-4 px-6">
+                        <button onclick="deployEngineer('${eng.name}')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Deploy Now
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderLifecycleTable(data) {
+            const tbody = document.getElementById('lifecycleTableBody');
+            tbody.innerHTML = '';
+            data.slice(0, 100).forEach(staff => {
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">${staff.initials}</span>
+                        <span>${staff.name}</span>
+                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 ${staff.stackClass} rounded-lg font-medium">${staff.stack}</span></td>
+                    <td class="py-4 px-6 font-medium text-slate-700">${staff.project}</td>
+                    <td class="py-4 px-6 mono text-slate-500">${staff.expiry}</td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full font-semibold">${staff.stage}</span></td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-medium">${staff.sop}</span></td>
+                    <td class="py-4 px-6">
+                        <button onclick="auditLifecycle('${staff.name}')" class="px-3 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Audit Workflow
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderGovernanceTable(data) {
+            const tbody = document.getElementById('governanceTableBody');
+            tbody.innerHTML = '';
+            data.forEach(proj => {
+                let healthBadge = proj.health.includes("Warning")
+                    ? '<span class="px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full font-semibold">Warning (Variance Alert)</span>'
+                    : '<span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full">Healthy (On Track)</span>';
+
+                let triggerBadge = proj.trigger.includes("Budget")
+                    ? '<span class="px-2 py-1 bg-rose-50 text-rose-700 rounded-full font-semibold">Budget Variance > 10% (Alert Sent)</span>'
+                    : '<span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">None (Proactive)</span>';
+
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold text-slate-900">${proj.name}</td>
+                    <td class="py-4 px-6">${healthBadge}</td>
+                    <td class="py-4 px-6 mono font-bold text-slate-700">${proj.burn}</td>
+                    <td class="py-4 px-6 mono text-slate-500">${proj.deadline}</td>
+                    <td class="py-4 px-6 mono font-bold text-indigo-600">${proj.util}</td>
+                    <td class="py-4 px-6">${triggerBadge}</td>
+                    <td class="py-4 px-6">
+                        <button onclick="viewPowerBiReport('${proj.name}')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Power BI Deep Dive
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderFinancialTable(data) {
+            const tbody = document.getElementById('financialTableBody');
+            tbody.innerHTML = '';
+            data.forEach(rec => {
+                let statusBadge = rec.status.includes("Submitted")
+                    ? '<span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-semibold">Submitted & Approved (On-Time)</span>'
+                    : '<span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full">Auto-Generated for Month-End</span>';
+
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold text-slate-900">${rec.client}</td>
+                    <td class="py-4 px-6 mono font-bold text-slate-700">${rec.po}</td>
+                    <td class="py-4 px-6 mono font-medium text-emerald-600">${rec.nonBillable}</td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-purple-50 text-purple-700 rounded-full font-medium">${rec.milestone}</span></td>
+                    <td class="py-4 px-6">${statusBadge}</td>
+                    <td class="py-4 px-6">
+                        <button onclick="reconcileInvoice('${rec.client}')" class="px-3 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Reconcile SOW/PO
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        renderTable(engineers);
+        renderResourceTable(engineers);
+        renderLifecycleTable(lifecycleStaff);
+        renderGovernanceTable(governanceProjects);
+        renderFinancialTable(financialRecords);
+
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const filtered = engineers.filter(eng => 
+                eng.name.toLowerCase().includes(filter) || 
+                eng.stack.toLowerCase().includes(filter) ||
+                eng.project.toLowerCase().includes(filter)
+            );
+            renderTable(filtered);
+        }
+
+        function filterResourceTable() {
+            const input = document.getElementById('searchResourceInput');
+            const filter = input.value.toLowerCase();
+            const filtered = engineers.filter(eng => 
+                eng.name.toLowerCase().includes(filter) || 
+                eng.stack.toLowerCase().includes(filter) ||
+                eng.status.toLowerCase().includes(filter)
+            );
+            renderResourceTable(filtered);
+        }
+
+        function filterLifecycleTable() {
+            const input = document.getElementById('searchLifecycleInput');
+            const filter = input.value.toLowerCase();
+            const filtered = lifecycleStaff.filter(staff => 
+                staff.name.toLowerCase().includes(filter) || 
+                staff.stack.toLowerCase().includes(filter) ||
+                staff.stage.toLowerCase().includes(filter)
+            );
+            renderLifecycleTable(filtered);
+        }
+
+        function filterGovernanceTable() {
+            const input = document.getElementById('searchGovernanceInput');
+            const filter = input.value.toLowerCase();
+            const filtered = governanceProjects.filter(proj =>
+                proj.name.toLowerCase().includes(filter) ||
+                proj.health.toLowerCase().includes(filter)
+            );
+            renderGovernanceTable(filtered);
+        }
+
+        function filterFinancialTable() {
+            const input = document.getElementById('searchFinancialInput');
+            const filter = input.value.toLowerCase();
+            const filtered = financialRecords.filter(rec =>
+                rec.client.toLowerCase().includes(filter) ||
+                rec.status.toLowerCase().includes(filter)
+            );
+            renderFinancialTable(filtered);
+        }
+
+        function deployEngineer(name) {
+            alert(`[Dynamic Reallocation Success]: ${name} has been successfully re-deployed to high-priority delivery stream with zero down-time.`);
+        }
+
+        function auditLifecycle(name) {
+            alert(`[Stage-Gate Audit]: ${name} workflow verified via Jira & Sheets API. Onboarding/Offboarding SOP closed-loop compliance at 100%.`);
+        }
+
+        function viewPowerBiReport(name) {
+            alert(`[Power BI Executive Dashboard]: Loading multi-dimensional analytics for ${name}. Automated risk alerts and budget variance metrics synced.`);
+        }
+
+        function reconcileInvoice(client) {
+            alert(`[SOW & PO Reconciliation]: Successfully verified milestone delivery and PO budget limits for ${client}. Monthly invoice generated and submitted on-time.`);
+        }
+
+        function runAiSimulation() {
+            const toast = document.getElementById('simulationToast');
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3500);
+        }
+
+        function openSkillUpskillingModal() {
+            alert("[AI Upskilling Plan]:\n1. To address the 12 FTE Distributed Systems deficit, the model recommends prioritizing 8 senior backend engineers for Rust/Go internal training.\n2. Estimated internal transition completion within 4 weeks, saving $120,000 in external recruitment & outsourcing costs.");
+        }
+    </script>
+</body>
+</html>
