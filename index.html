@@ -30,7 +30,7 @@
                     <i data-lucide="cpu" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-base sm:text-lg text-slate-900 tracking-tight">Demand Forecasting & Capacity</h1>
+                    <h1 class="font-bold text-base sm:text-lg text-slate-900 tracking-tight">Demand Forecasting & Capacity Planning</h1>
                     <p class="text-xs text-slate-500">Singapore R&D Hub | Powered by Python, SQL & Claude Code</p>
                 </div>
             </div>
@@ -49,18 +49,18 @@
 
     <!-- Navigation Tabs -->
     <div class="bg-white border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-6 overflow-x-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8 overflow-x-auto">
             <button onclick="switchTab('demand')" id="tabDemand" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2 whitespace-nowrap">
                 <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                <span>Demand & Capacity</span>
+                <span>Demand Forecasting & Capacity</span>
             </button>
             <button onclick="switchTab('resource')" id="tabResource" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap">
                 <i data-lucide="users" class="w-4 h-4"></i>
-                <span>Resource Allocation</span>
+                <span>Resource Planning & Allocation</span>
             </button>
             <button onclick="switchTab('lifecycle')" id="tabLifecycle" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap">
                 <i data-lucide="git-branch" class="w-4 h-4"></i>
-                <span>Lifecycle Management</span>
+                <span>Lifecycle & Transition Management</span>
             </button>
             <button onclick="switchTab('governance')" id="tabGovernance" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap">
                 <i data-lucide="shield-alert" class="w-4 h-4"></i>
@@ -68,11 +68,7 @@
             </button>
             <button onclick="switchTab('financial')" id="tabFinancial" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap">
                 <i data-lucide="dollar-sign" class="w-4 h-4"></i>
-                <span>Financial & Invoicing</span>
-            </button>
-            <button onclick="switchTab('upskilling')" id="tabUpskilling" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap">
-                <i data-lucide="trending-up" class="w-4 h-4"></i>
-                <span>Upskilling & Re-deployment</span>
+                <span>Financial & Invoicing Operations</span>
             </button>
         </div>
     </div>
@@ -193,119 +189,394 @@
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-slate-100">
-                        <button onclick="switchTab('upskilling')" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-xl transition-colors">
+                        <button onclick="openSkillUpskillingModal()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition-colors">
                             View Internal Upskilling Plan
                         </button>
                     </div>
                 </div>
             </div>
+
+            <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">Engineer Skill Maturity & Project Transition Schedule</h3>
+                        <p class="text-xs text-slate-500">Model tracking transition timelines and skill maturity for all 142 engineers</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto">
+                        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search engineer name or tech stack..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64">
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table id="allocTable" class="w-full text-left border-collapse text-xs">
+                        <thead class="sticky top-0 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider z-10">
+                            <tr>
+                                <th class="py-3 px-6">Engineer</th>
+                                <th class="py-3 px-6">Tech Stack</th>
+                                <th class="py-3 px-6">Maturity Level</th>
+                                <th class="py-3 px-6">Current Project</th>
+                                <th class="py-3 px-6">Transition Date</th>
+                                <th class="py-3 px-6">AI Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-slate-100 text-slate-700">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <!-- TAB 2: Resource Planning -->
+        <!-- TAB 2: Resource Planning & Allocation -->
         <div id="contentResource" class="space-y-8 hidden">
-            <!-- 內容省略以保持簡潔，保留完整程式碼結構 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Active Engineers Visible</span>
+                        <span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="users" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">142 <span class="text-sm font-normal text-slate-400">FTE</span></div>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">100% Visibility</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Zero information silos across departments</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Average Workload Rate</span>
+                        <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><i data-lucide="activity" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">88.4%</div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Optimal</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Balanced project load across all teams</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Engineers in Bench / Gap</span>
+                        <span class="p-2 bg-amber-50 text-amber-600 rounded-xl"><i data-lucide="clock" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">14 <span class="text-sm font-normal text-slate-400">FTE</span></div>
+                        <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">Ready to Deploy</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Transitioning to high-priority lines</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Internal Mobility Rate</span>
+                        <span class="p-2 bg-purple-50 text-purple-600 rounded-xl"><i data-lucide="shuffle" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">94.2%</div>
+                        <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">Internal First</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Crisis resolved via internal re-deployment</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">Dynamic Resource Allocation & Bench Visibility Dashboard</h3>
+                        <p class="text-xs text-slate-500">Tracking skill tags, current project workload rates, and gap periods for rapid deployment</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto">
+                        <input type="text" id="searchResourceInput" onkeyup="filterResourceTable()" placeholder="Search engineer, skill tag, or status..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64">
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table id="resourceTable" class="w-full text-left border-collapse text-xs">
+                        <thead class="sticky top-0 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider z-10">
+                            <tr>
+                                <th class="py-3 px-6">Engineer</th>
+                                <th class="py-3 px-6">Skill Tags</th>
+                                <th class="py-3 px-6">Current Workload Rate</th>
+                                <th class="py-3 px-6">Status / Gap Period</th>
+                                <th class="py-3 px-6">Dynamic Reallocation Target</th>
+                                <th class="py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resourceTableBody" class="divide-y divide-slate-100 text-slate-700">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <!-- TAB 6: Upskilling & Re-deployment Plan -->
-        <div id="contentUpskilling" class="space-y-8 hidden">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div class="glass-card p-6 rounded-2xl shadow-sm border-l-4 border-rose-500">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">High Risk Deficit</span>
-                    <h3 class="text-xl font-bold text-slate-900 mt-1">Distributed Systems</h3>
-                    <div class="mt-3 flex items-baseline justify-between">
-                        <span class="text-2xl font-bold mono text-rose-600">-12 FTE</span>
-                        <span class="text-xs bg-rose-50 text-rose-700 px-2.5 py-1 rounded-full font-medium">Priority 1 Training</span>
+        <!-- TAB 3: Lifecycle & Transition Management -->
+        <div id="contentLifecycle" class="space-y-8 hidden">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Global Workforce Tracked</span>
+                        <span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="database" class="w-5 h-5"></i></span>
                     </div>
-                    <p class="mt-3 text-xs text-slate-500">Targeting 12 internal senior engineers from Data Engineering & Frontend surplus pools for 8-week Rust/Go & microservices intensive upskilling.</p>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">500+</div>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">Employees & Contractors</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Real-time master DB via Python, SQL & Sheets API</p>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl shadow-sm border-l-4 border-amber-500">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-amber-600">Medium Risk Deficit</span>
-                    <h3 class="text-xl font-bold text-slate-900 mt-1">Core Architecture</h3>
-                    <div class="mt-3 flex items-baseline justify-between">
-                        <span class="text-2xl font-bold mono text-amber-600">-5 FTE</span>
-                        <span class="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-medium">Priority 2 Training</span>
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Onboarding / Offboarding SOP</span>
+                        <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
                     </div>
-                    <p class="mt-3 text-xs text-slate-500">Upgrading internal mid-to-senior engineers on core framework refactoring and system scalability to meet 2027 Q1 expansion requirements.</p>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">100%</div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Closed-Loop</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Automated IT & HR asset/access verification</p>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl shadow-sm border-l-4 border-emerald-500">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-emerald-600">Cost Savings Impact</span>
-                    <h3 class="text-xl font-bold text-slate-900 mt-1">Internal Re-deployment</h3>
-                    <div class="mt-3 flex items-baseline justify-between">
-                        <span class="text-2xl font-bold mono text-emerald-600">-$340K</span>
-                        <span class="text-xs bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full font-medium">35% Cost Reduction</span>
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Stage-Gate Transition Active</span>
+                        <span class="p-2 bg-blue-50 text-blue-600 rounded-xl"><i data-lucide="git-merge" class="w-5 h-5"></i></span>
                     </div>
-                    <p class="mt-3 text-xs text-slate-500">Avoiding expensive external hiring and vendor outsourcing by achieving 94.2% internal mobility and targeted upskilling.</p>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">38</div>
+                        <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Jira Workflows</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Seamless Project A to Project B handoffs</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Transition Gap Efficiency</span>
+                        <span class="p-2 bg-purple-50 text-purple-600 rounded-xl"><i data-lucide="clock" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">0 Days</div>
+                        <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">Zero Idle Time</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Eliminated personnel idling and handover delays</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">Global Personnel Master DB & Stage-Gate Transition Tracker (500+ Records)</h3>
+                        <p class="text-xs text-slate-500">Python/SQL & Sheets API automated tracking of contracts, skill tags, project bindings, and transition periods</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto">
+                        <input type="text" id="searchLifecycleInput" onkeyup="filterLifecycleTable()" placeholder="Search staff name, status, or stage..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64">
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table id="lifecycleTable" class="w-full text-left border-collapse text-xs">
+                        <thead class="sticky top-0 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider z-10">
+                            <tr>
+                                <th class="py-3 px-6">Staff Name</th>
+                                <th class="py-3 px-6">Role / Skill Tag</th>
+                                <th class="py-3 px-6">Current Binding</th>
+                                <th class="py-3 px-6">Contract Expiry</th>
+                                <th class="py-3 px-6">Transition Stage (Jira)</th>
+                                <th class="py-3 px-6">SOP Compliance Status</th>
+                                <th class="py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lifecycleTableBody" class="divide-y divide-slate-100 text-slate-700">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: Governance & Metrics -->
+        <div id="contentGovernance" class="space-y-8 hidden">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Decision Speed Agility</span>
+                        <span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="zap" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">+40%</div>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">Cycle Reduction</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Executive decision & response cycle accelerated</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Financial & Project Visibility</span>
+                        <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><i data-lucide="eye" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">100%</div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Full Transparency</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Budget variance and health tracked in real-time</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Active PMO Projects Monitored</span>
+                        <span class="p-2 bg-blue-50 text-blue-600 rounded-xl"><i data-lucide="layout-dashboard" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">24</div>
+                        <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Power BI & Jira</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Multi-dimensional data sources integrated</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Automated Risk Alerts</span>
+                        <span class="p-2 bg-rose-50 text-rose-600 rounded-xl"><i data-lucide="bell-ring" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">0</div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Proactive Warning</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Prevented budget overruns and milestone delays</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">Executive PMO Dashboard & Risk Alert Matrix (Power BI & Jira Powered)</h3>
+                        <p class="text-xs text-slate-500">Multi-dimensional integration of project health, budget burn rate, milestone status, and team utilization</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto">
+                        <input type="text" id="searchGovernanceInput" onkeyup="filterGovernanceTable()" placeholder="Search project name, owner, or risk..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64">
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table id="governanceTable" class="w-full text-left border-collapse text-xs">
+                        <thead class="sticky top-0 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider z-10">
+                            <tr>
+                                <th class="py-3 px-6">Project Name</th>
+                                <th class="py-3 px-6">Health Status</th>
+                                <th class="py-3 px-6">Budget Burn Rate</th>
+                                <th class="py-3 px-6">Milestone Deadline</th>
+                                <th class="py-3 px-6">Team Utilization</th>
+                                <th class="py-3 px-6">Risk Alert Trigger</th>
+                                <th class="py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="governanceTableBody" class="divide-y divide-slate-100 text-slate-700">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: Financial & Invoicing Operations -->
+        <div id="contentFinancial" class="space-y-8 hidden">
+            <!-- Financial KPI Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">SOW & PO Tracked</span>
+                        <span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="file-text" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">100%</div>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">Lifecycle Linked</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">All terms, PO limits & milestones synced with Jira</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Non-Billable Cost Control</span>
+                        <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">-28%</div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Optimized</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Excess internal capacity redirected to billable streams</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Monthly Invoicing On-Time</span>
+                        <span class="p-2 bg-blue-50 text-blue-600 rounded-xl"><i data-lucide="check-circle-2" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">99.5%</div>
+                        <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Automated SOP</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Milestones reconciled & submitted before month-end</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">AR Collections Cycle</span>
+                        <span class="p-2 bg-purple-50 text-purple-600 rounded-xl"><i data-lucide="dollar-sign" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">-14 Days</div>
+                        <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">Accelerated</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Zero disputes via automated progress verification</p>
+                </div>
+            </div>
+
+            <!-- Financial & Invoicing Tracking Table -->
+            <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">SOW, PO Limits & Monthly Invoicing Governance Dashboard</h3>
+                        <p class="text-xs text-slate-500">Automated tracking of statement of work, purchase orders, non-billable cost thresholds, and milestone billing</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto">
+                        <input type="text" id="searchFinancialInput" onkeyup="filterFinancialTable()" placeholder="Search client, SOW, or invoice status..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64">
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table id="financialTable" class="w-full text-left border-collapse text-xs">
+                        <thead class="sticky top-0 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider z-10">
+                            <tr>
+                                <th class="py-3 px-6">Client / Project (SOW Ref)</th>
+                                <th class="py-3 px-6">PO Limit & Allocated Budget</th>
+                                <th class="py-3 px-6">Non-Billable Cost Ratio</th>
+                                <th class="py-3 px-6">Milestone Reconciled</th>
+                                <th class="py-3 px-6">Monthly Invoice Status</th>
+                                <th class="py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financialTableBody" class="divide-y divide-slate-100 text-slate-700">
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
     </main>
 
+    <!-- Toast -->
+    <div id="simulationToast" class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-4 rounded-2xl shadow-2xl flex items-center space-x-3 border border-slate-800">
+        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>
+        <div>
+            <p class="text-xs font-bold">AI Predictive Model Executed Successfully</p>
+            <p class="text-[10px] text-slate-400">Successfully synchronized Sales pipeline and 142 capacity matrix.</p>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
         lucide.createIcons();
 
-        let demandCapacityChart = null;
-
-        // 初始化 Chart.js 圖表
-        function initChart() {
-            const canvas = document.getElementById('demandCapacityChart');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            if (demandCapacityChart) {
-                demandCapacityChart.destroy();
-            }
-            demandCapacityChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['2026 Q3 (Actual)', '2026 Q4 (Current)', '2027 Q1 (Forecast)', '2027 Q2 (Forecast)'],
-                    datasets: [
-                        {
-                            label: 'Demand (FTE)',
-                            data: [115, 138, 155, 170],
-                            backgroundColor: '#4f46e5',
-                            borderRadius: 8,
-                        },
-                        {
-                            label: 'Capacity (FTE)',
-                            data: [120, 142, 145, 148],
-                            backgroundColor: '#10b981',
-                            borderRadius: 8,
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { grid: { color: 'rgba(226, 232, 240, 0.5)' }, ticks: { font: { family: 'JetBrains Mono' } } },
-                        x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
-                    }
-                }
-            });
-        }
-
-        // 頁面載入完成後初始化圖表
-        window.addEventListener('DOMContentLoaded', () => {
-            initChart();
-        });
-
-        // Tab 切換邏輯 (切換回 Demand 分頁時重新調整圖表大小)
+        // Tab Switching Logic
         function switchTab(tab) {
-            const tabs = ['demand', 'resource', 'lifecycle', 'governance', 'financial', 'upskilling'];
+            const tabs = ['demand', 'resource', 'lifecycle', 'governance', 'financial'];
             tabs.forEach(t => {
                 const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
                 const content = document.getElementById('content' + t.charAt(0).toUpperCase() + t.slice(1));
-                if (!btn || !content) return;
                 if (t === tab) {
                     btn.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2 whitespace-nowrap";
                     content.classList.remove('hidden');
-                    if (t === 'demand' && demandCapacityChart) {
-                        setTimeout(() => demandCapacityChart.resize(), 50);
-                    }
                 } else {
                     btn.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2 whitespace-nowrap";
                     content.classList.add('hidden');
@@ -313,8 +584,361 @@
             });
         }
 
+        // Chart.js
+        const ctx = document.getElementById('demandCapacityChart').getContext('2d');
+        const demandCapacityChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2026 Q3 (Actual)', '2026 Q4 (Current)', '2027 Q1 (Forecast)', '2027 Q2 (Forecast)'],
+                datasets: [
+                    {
+                        label: 'Demand (FTE)',
+                        data: [115, 138, 155, 170],
+                        backgroundColor: '#4f46e5',
+                        borderRadius: 8,
+                    },
+                    {
+                        label: 'Capacity (FTE)',
+                        data: [120, 142, 145, 148],
+                        backgroundColor: '#10b981',
+                        borderRadius: 8,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: 'rgba(226, 232, 240, 0.5)' }, ticks: { font: { family: 'JetBrains Mono' } } },
+                    x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
+                }
+            }
+        });
+
+        // 142 FTE Data Generation for Tab 1
+        const firstNames = ["Alex", "Brian", "Chloe", "David", "Elena", "Frank", "Grace", "Herman", "Ivy", "Jack", "Kevin", "Linda", "Michael", "Nancy", "Oliver", "Peter", "Queen", "Ryan", "Sarah", "Tom"];
+        const lastNames = ["K.", "L.", "W.", "T.", "S.", "M.", "G.", "H.", "I.", "J.", "Chen", "Wang", "Lee", "Zhang", "Lin", "Liu", "Wu", "Huang", "Davis", "Smith"];
+        const techStacks = [
+            { name: "Core Architecture", bg: "bg-indigo-50 text-indigo-600" },
+            { name: "Distributed Systems", bg: "bg-blue-50 text-blue-600" },
+            { name: "Data Engineering", bg: "bg-purple-50 text-purple-600" },
+            { name: "Frontend & Web3 UI", bg: "bg-emerald-50 text-emerald-600" }
+        ];
+        const maturities = ["L5 (Expert)", "L4 (Senior)", "L3 (Mid-Level)"];
+        const projects = ["Payment Gateway V2", "Order Matching Engine", "Risk Analytics Pipeline", "Institutional Dashboard", "Cross-Border Settlement", "API Gateway Service", "Smart Contract Auditor", "Liquidity Pool V3"];
+        const recommendations = [
+            "Transition to Web3 DEX Core", "Internal Training for Project A", "Support Distributed Systems", "Retain / Mentor Juniors", "High-Frequency Trading Architect", "Next-Gen Distributed Support"
+        ];
+        const dates = ["2026/10/30", "2026/11/10", "2026/11/15", "2026/11/30", "2026/12/01", "2026/12/15", "2027/01/15"];
+        const stages = ["Stage 1: Handoff Initiated", "Stage 2: Knowledge Transfer", "Stage 3: Asset & Access Audit", "Stage 4: Seamlessly Re-assigned"];
+        const expiryDates = ["2027/06/30", "2027/12/31", "2028/03/15", "2026/11/30", "2027/09/10"];
+
+        let engineers = [];
+        for (let i = 1; i <= 142; i++) {
+            let fn = firstNames[i % firstNames.length];
+            let ln = lastNames[(i * 3) % lastNames.length];
+            let ts = techStacks[i % techStacks.length];
+            let mat = maturities[i % maturities.length];
+            let prj = projects[i % projects.length];
+            let dt = dates[i % dates.length];
+            let rec = recommendations[i % recommendations.length];
+            let initials = fn[0] + ln[0];
+
+            engineers.push({
+                name: `${fn} ${ln}`,
+                initials: initials,
+                stack: ts.name,
+                stackClass: ts.bg,
+                maturity: mat,
+                project: prj,
+                date: dt,
+                recommendation: rec,
+                workload: `${Math.floor(75 + (i * 13) % 25)}%`,
+                status: i % 10 === 0 ? "Bench / In Gap" : "Active Assigned",
+                target: i % 10 === 0 ? "High-Priority Delivery Line" : "Current Stream",
+                expiry: expiryDates[i % expiryDates.length],
+                stage: stages[i % stages.length],
+                sop: "100% Closed-Loop"
+            });
+        }
+
+        let lifecycleStaff = [];
+        for (let i = 1; i <= 500; i++) {
+            let fn = firstNames[i % firstNames.length];
+            let ln = lastNames[(i * 7) % lastNames.length];
+            let ts = techStacks[i % techStacks.length];
+            let prj = projects[i % projects.length];
+            let initials = fn[0] + ln[0];
+
+            lifecycleStaff.push({
+                name: `${fn} ${ln} (Staff #${i})`,
+                initials: initials,
+                stack: ts.name,
+                stackClass: ts.bg,
+                project: prj,
+                expiry: expiryDates[i % expiryDates.length],
+                stage: stages[i % stages.length],
+                sop: "100% Closed-Loop Verified"
+            });
+        }
+
+        let governanceProjects = [];
+        for (let i = 1; i <= 24; i++) {
+            let prjName = projects[i % projects.length] + ` (Hub #${i})`;
+            let health = i % 5 === 0 ? "Warning (Variance Alert)" : "Healthy (On Track)";
+            let burn = `${Math.floor(80 + (i * 3) % 18)}%`;
+            let deadline = dates[i % dates.length];
+            let util = `${Math.floor(85 + (i * 2) % 15)}%`;
+            let trigger = i % 5 === 0 ? "Budget Variance > 10% (Auto Alert)" : "None (Proactive)";
+
+            governanceProjects.push({
+                name: prjName,
+                health: health,
+                burn: burn,
+                deadline: deadline,
+                util: util,
+                trigger: trigger
+            });
+        }
+
+        // Financial & Invoicing Data
+        let financialRecords = [];
+        const clients = ["Binance Tier-1", "OKX Global Hub", "Bybit Settlement", "BitMart Tech", "Deepcubation Labs", "Polygon Network", "Solana APAC", "Chainlink Node"];
+        for (let i = 1; i <= 30; i++) {
+            let clientName = clients[i % clients.length] + ` (SOW-2026-${100 + i})`;
+            let poLimit = `$${(150 + i * 25)},000 USD`;
+            let nonBillable = `${Math.floor(4 + (i * 2) % 8)}% (Controlled)`;
+            let milestone = i % 3 === 0 ? "Milestone 3 Reconciled" : "Milestone 2 Reconciled";
+            let invStatus = i % 4 === 0 ? "Submitted & Approved (On-Time)" : "Auto-Generated for Month-End";
+
+            financialRecords.push({
+                client: clientName,
+                po: poLimit,
+                nonBillable: nonBillable,
+                milestone: milestone,
+                status: invStatus
+            });
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            data.forEach(eng => {
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">${eng.initials}</span>
+                        <span>${eng.name}</span>
+                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 ${eng.stackClass} rounded-lg font-medium">${eng.stack}</span></td>
+                    <td class="py-4 px-6"><span class="font-bold">${eng.maturity}</span></td>
+                    <td class="py-4 px-6">${eng.project}</td>
+                    <td class="py-4 px-6 mono text-slate-500">${eng.date}</td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-medium">${eng.recommendation}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderResourceTable(data) {
+            const tbody = document.getElementById('resourceTableBody');
+            tbody.innerHTML = '';
+            data.forEach(eng => {
+                let statusBadge = eng.status.includes("Bench") 
+                    ? '<span class="px-2 py-1 bg-amber-50 text-amber-700 rounded-full font-semibold">Bench / Gap Period</span>' 
+                    : '<span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">Active Assigned</span>';
+                
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">${eng.initials}</span>
+                        <span>${eng.name}</span>
+                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 ${eng.stackClass} rounded-lg font-medium">${eng.stack}</span></td>
+                    <td class="py-4 px-6"><span class="mono font-bold text-slate-700">${eng.workload}</span></td>
+                    <td class="py-4 px-6">${statusBadge}</td>
+                    <td class="py-4 px-6"><span class="font-medium text-indigo-600">${eng.target}</span></td>
+                    <td class="py-4 px-6">
+                        <button onclick="deployEngineer('${eng.name}')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Deploy Now
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderLifecycleTable(data) {
+            const tbody = document.getElementById('lifecycleTableBody');
+            tbody.innerHTML = '';
+            data.slice(0, 100).forEach(staff => {
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">${staff.initials}</span>
+                        <span>${staff.name}</span>
+                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 ${staff.stackClass} rounded-lg font-medium">${staff.stack}</span></td>
+                    <td class="py-4 px-6 font-medium text-slate-700">${staff.project}</td>
+                    <td class="py-4 px-6 mono text-slate-500">${staff.expiry}</td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full font-semibold">${staff.stage}</span></td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-medium">${staff.sop}</span></td>
+                    <td class="py-4 px-6">
+                        <button onclick="auditLifecycle('${staff.name}')" class="px-3 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Audit Workflow
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderGovernanceTable(data) {
+            const tbody = document.getElementById('governanceTableBody');
+            tbody.innerHTML = '';
+            data.forEach(proj => {
+                let healthBadge = proj.health.includes("Warning")
+                    ? '<span class="px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full font-semibold">Warning (Variance Alert)</span>'
+                    : '<span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full">Healthy (On Track)</span>';
+
+                let triggerBadge = proj.trigger.includes("Budget")
+                    ? '<span class="px-2 py-1 bg-rose-50 text-rose-700 rounded-full font-semibold">Budget Variance > 10% (Alert Sent)</span>'
+                    : '<span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">None (Proactive)</span>';
+
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold text-slate-900">${proj.name}</td>
+                    <td class="py-4 px-6">${healthBadge}</td>
+                    <td class="py-4 px-6 mono font-bold text-slate-700">${proj.burn}</td>
+                    <td class="py-4 px-6 mono text-slate-500">${proj.deadline}</td>
+                    <td class="py-4 px-6 mono font-bold text-indigo-600">${proj.util}</td>
+                    <td class="py-4 px-6">${triggerBadge}</td>
+                    <td class="py-4 px-6">
+                        <button onclick="viewPowerBiReport('${proj.name}')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Power BI Deep Dive
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderFinancialTable(data) {
+            const tbody = document.getElementById('financialTableBody');
+            tbody.innerHTML = '';
+            data.forEach(rec => {
+                let statusBadge = rec.status.includes("Submitted")
+                    ? '<span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-semibold">Submitted & Approved (On-Time)</span>'
+                    : '<span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full">Auto-Generated for Month-End</span>';
+
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold text-slate-900">${rec.client}</td>
+                    <td class="py-4 px-6 mono font-bold text-slate-700">${rec.po}</td>
+                    <td class="py-4 px-6 mono font-medium text-emerald-600">${rec.nonBillable}</td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-purple-50 text-purple-700 rounded-full font-medium">${rec.milestone}</span></td>
+                    <td class="py-4 px-6">${statusBadge}</td>
+                    <td class="py-4 px-6">
+                        <button onclick="reconcileInvoice('${rec.client}')" class="px-3 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Reconcile SOW/PO
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        renderTable(engineers);
+        renderResourceTable(engineers);
+        renderLifecycleTable(lifecycleStaff);
+        renderGovernanceTable(governanceProjects);
+        renderFinancialTable(financialRecords);
+
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const filtered = engineers.filter(eng => 
+                eng.name.toLowerCase().includes(filter) || 
+                eng.stack.toLowerCase().includes(filter) ||
+                eng.project.toLowerCase().includes(filter)
+            );
+            renderTable(filtered);
+        }
+
+        function filterResourceTable() {
+            const input = document.getElementById('searchResourceInput');
+            const filter = input.value.toLowerCase();
+            const filtered = engineers.filter(eng => 
+                eng.name.toLowerCase().includes(filter) || 
+                eng.stack.toLowerCase().includes(filter) ||
+                eng.status.toLowerCase().includes(filter)
+            );
+            renderResourceTable(filtered);
+        }
+
+        function filterLifecycleTable() {
+            const input = document.getElementById('searchLifecycleInput');
+            const filter = input.value.toLowerCase();
+            const filtered = lifecycleStaff.filter(staff => 
+                staff.name.toLowerCase().includes(filter) || 
+                staff.stack.toLowerCase().includes(filter) ||
+                staff.stage.toLowerCase().includes(filter)
+            );
+            renderLifecycleTable(filtered);
+        }
+
+        function filterGovernanceTable() {
+            const input = document.getElementById('searchGovernanceInput');
+            const filter = input.value.toLowerCase();
+            const filtered = governanceProjects.filter(proj =>
+                proj.name.toLowerCase().includes(filter) ||
+                proj.health.toLowerCase().includes(filter)
+            );
+            renderGovernanceTable(filtered);
+        }
+
+        function filterFinancialTable() {
+            const input = document.getElementById('searchFinancialInput');
+            const filter = input.value.toLowerCase();
+            const filtered = financialRecords.filter(rec =>
+                rec.client.toLowerCase().includes(filter) ||
+                rec.status.toLowerCase().includes(filter)
+            );
+            renderFinancialTable(filtered);
+        }
+
+        function deployEngineer(name) {
+            alert(`[Dynamic Reallocation Success]: ${name} has been successfully re-deployed to high-priority delivery stream with zero down-time.`);
+        }
+
+        function auditLifecycle(name) {
+            alert(`[Stage-Gate Audit]: ${name} workflow verified via Jira & Sheets API. Onboarding/Offboarding SOP closed-loop compliance at 100%.`);
+        }
+
+        function viewPowerBiReport(name) {
+            alert(`[Power BI Executive Dashboard]: Loading multi-dimensional analytics for ${name}. Automated risk alerts and budget variance metrics synced.`);
+        }
+
+        function reconcileInvoice(client) {
+            alert(`[SOW & PO Reconciliation]: Successfully verified milestone delivery and PO budget limits for ${client}. Monthly invoice generated and submitted on-time.`);
+        }
+
         function runAiSimulation() {
-            alert('AI Predictive Model Executed Successfully. Demand & Capacity synchronized.');
+            const toast = document.getElementById('simulationToast');
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3500);
+        }
+
+        function openSkillUpskillingModal() {
+            alert("[AI Upskilling Plan]:\n1. To address the 12 FTE Distributed Systems deficit, the model recommends prioritizing 8 senior backend engineers for Rust/Go internal training.\n2. Estimated internal transition completion within 4 weeks, saving $120,000 in external recruitment & outsourcing costs.");
         }
     </script>
 </body>
