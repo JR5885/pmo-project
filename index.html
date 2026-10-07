@@ -201,4 +201,259 @@
                             <tr>
                                 <th class="py-3 px-6">Engineer</th>
                                 <th class="py-3 px-6">Tech Stack</th>
-                                <th
+                                <th class="py-3 px-6">Maturity Level</th>
+                                <th class="py-3 px-6">Current Project</th>
+                                <th class="py-3 px-6">Transition Date</th>
+                                <th class="py-3 px-6">AI Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-slate-100 text-slate-700">
+                            <!-- Dynamically populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: Executive Overview & PMO Core Framework -->
+        <div id="tab-executive" class="space-y-8 hidden">
+            <!-- Story Header -->
+            <div class="glass-card p-8 rounded-3xl shadow-sm space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-semibold mb-3">
+                        <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
+                        <span>Executive Case Study | Singapore R&D Hub (500+ Workforce)</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">Dynamic Cross-Functional Deployment & Capacity Rebalancing</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                    <!-- Context -->
+                    <div class="space-y-2 bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                        <div class="flex items-center space-x-2 text-indigo-600 font-bold">
+                            <i data-lucide="alert-circle" class="w-4 h-4"></i>
+                            <h3>Context & Challenge</h3>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed text-xs">
+                            At BM Singapore as Sr. HRBP & PMO during core product line revamps across 500+ cross-border engineers, severe capacity bottlenecks and idle gaps occurred simultaneously. Certain delivery lines faced architectural gridlock and burnout, while completed project pods sat idle awaiting next-phase alignment, risking product launch delays and severe resource waste.
+                        </p>
+                    </div>
+
+                    <!-- Action -->
+                    <div class="space-y-2 bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                        <div class="flex items-center space-x-2 text-indigo-600 font-bold">
+                            <i data-lucide="zap" class="w-4 h-4"></i>
+                            <h3>Strategic Action</h3>
+                        </div>
+                        <ul class="text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed text-xs">
+                            <li><strong>Tech Debt & Gap Auditing</strong>: Deep alignment with Delivery Leads to map module requirements and milestone timelines.</li>
+                            <li><strong>Real-time Visibility Dashboard</strong>: Built with Python, SQL & Claude Code to make engineer skill tags, current loads, and idle windows fully transparent.</li>
+                            <li><strong>Dynamic Reassignment</strong>: Rapidly redeployed waiting engineers to high-priority lines, keeping allocation accuracy above 95% purely via internal mobility.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Result -->
+                    <div class="space-y-2 bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                        <div class="flex items-center space-x-2 text-emerald-600 font-bold">
+                            <i data-lucide="trending-up" class="w-4 h-4"></i>
+                            <h3>Business Impact</h3>
+                        </div>
+                        <ul class="text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed text-xs">
+                            <li>Completely eliminated headcount bottlenecks and idle gaps, maximizing resource utilization without headcounter expansion.</li>
+                            <li>Accelerated cross-functional strategic decision-making and scheduling cycles by <strong>40%</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- RACI Matrix -->
+                <div class="pt-4 border-t border-slate-100">
+                    <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center space-x-2">
+                        <i data-lucide="users" class="w-4 h-4 text-indigo-600"></i>
+                        <span>RACI Governance Matrix</span>
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                        <div class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                            <span class="font-bold text-indigo-700 block mb-1">Responsible (R)</span>
+                            <span class="text-slate-600">PMO & Resource Manager (Model building, data analytics, dashboard publishing).</span>
+                        </div>
+                        <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-100">
+                            <span class="font-bold text-emerald-700 block mb-1">Accountable (A)</span>
+                            <span class="text-slate-600">Business Leaders & Delivery Leads (Ultimate accountability for delivery schedule and capacity allocation).</span>
+                        </div>
+                        <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-100">
+                            <span class="font-bold text-amber-700 block mb-1">Consulted (C)</span>
+                            <span class="text-slate-600">Sales & Tech Leads (Providing business orders, product roadmaps, and technical specifications).</span>
+                        </div>
+                        <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100">
+                            <span class="font-bold text-blue-700 block mb-1">Informed (I)</span>
+                            <span class="text-slate-600">Engineering Teams & Regional Directors (Receiving schedule notifications and skill development targets).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Toast -->
+    <div id="simulationToast" class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-4 rounded-2xl shadow-2xl flex items-center space-x-3 border border-slate-800">
+        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>
+        <div>
+            <p class="text-xs font-bold">AI Predictive Model Executed Successfully</p>
+            <p class="text-[10px] text-slate-400">Successfully synchronized Sales pipeline and 142 capacity matrix.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        lucide.createIcons();
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            const tabCapacity = document.getElementById('tab-capacity');
+            const tabExecutive = document.getElementById('tab-executive');
+            const btnCapacity = document.getElementById('btn-tab-capacity');
+            const btnExecutive = document.getElementById('btn-tab-executive');
+            const btnMobCapacity = document.getElementById('btn-mobile-capacity');
+            const btnMobExecutive = document.getElementById('btn-mobile-executive');
+
+            if (tabId === 'tab-capacity') {
+                tabCapacity.classList.remove('hidden');
+                tabExecutive.classList.add('hidden');
+                
+                btnCapacity.className = "px-4 py-1.5 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm transition-all";
+                btnExecutive.className = "px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all";
+                
+                btnMobCapacity.className = "flex-1 py-1 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm";
+                btnMobExecutive.className = "flex-1 py-1 text-xs font-semibold rounded-lg text-slate-600";
+            } else {
+                tabCapacity.classList.add('hidden');
+                tabExecutive.classList.remove('hidden');
+                
+                btnExecutive.className = "px-4 py-1.5 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm transition-all";
+                btnCapacity.className = "px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all";
+                
+                btnMobExecutive.className = "flex-1 py-1 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm";
+                btnMobCapacity.className = "flex-1 py-1 text-xs font-semibold rounded-lg text-slate-600";
+            }
+        }
+
+        // Chart.js
+        const ctx = document.getElementById('demandCapacityChart').getContext('2d');
+        const demandCapacityChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2026 Q3 (Actual)', '2026 Q4 (Current)', '2027 Q1 (Forecast)', '2027 Q2 (Forecast)'],
+                datasets: [
+                    {
+                        label: 'Demand (FTE)',
+                        data: [115, 138, 155, 170],
+                        backgroundColor: '#4f46e5',
+                        borderRadius: 8,
+                    },
+                    {
+                        label: 'Capacity (FTE)',
+                        data: [120, 142, 145, 148],
+                        backgroundColor: '#10b981',
+                        borderRadius: 8,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: 'rgba(226, 232, 240, 0.5)' }, ticks: { font: { family: 'JetBrains Mono' } } },
+                    x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
+                }
+            }
+        });
+
+        // 142 FTE Data Generation
+        const firstNames = ["Alex", "Brian", "Chloe", "David", "Elena", "Frank", "Grace", "Herman", "Ivy", "Jack", "Kevin", "Linda", "Michael", "Nancy", "Oliver", "Peter", "Queen", "Ryan", "Sarah", "Tom"];
+        const lastNames = ["K.", "L.", "W.", "T.", "S.", "M.", "G.", "H.", "I.", "J.", "Chen", "Wang", "Lee", "Zhang", "Lin", "Liu", "Wu", "Huang", "Davis", "Smith"];
+        const techStacks = [
+            { name: "Core Architecture", bg: "bg-indigo-50 text-indigo-600" },
+            { name: "Distributed Systems", bg: "bg-blue-50 text-blue-600" },
+            { name: "Data Engineering", bg: "bg-purple-50 text-purple-600" },
+            { name: "Frontend & Web3 UI", bg: "bg-emerald-50 text-emerald-600" }
+        ];
+        const maturities = ["L5 (Expert)", "L4 (Senior)", "L3 (Mid-Level)"];
+        const projects = ["Payment Gateway V2", "Order Matching Engine", "Risk Analytics Pipeline", "Institutional Dashboard", "Cross-Border Settlement", "API Gateway Service", "Smart Contract Auditor", "Liquidity Pool V3"];
+        const recommendations = [
+            "Transition to Web3 DEX Core", "Internal Training for Project A", "Support Distributed Systems", "Retain / Mentor Juniors", "High-Frequency Trading Architect", "Next-Gen Distributed Support"
+        ];
+        const dates = ["2026/10/30", "2026/11/10", "2026/11/15", "2026/11/30", "2026/12/01", "2026/12/15", "2027/01/15"];
+
+        let engineers = [];
+        for (let i = 1; i <= 142; i++) {
+            let fn = firstNames[i % firstNames.length];
+            let ln = lastNames[(i * 3) % lastNames.length];
+            let ts = techStacks[i % techStacks.length];
+            let mat = maturities[i % maturities.length];
+            let prj = projects[i % projects.length];
+            let dt = dates[i % dates.length];
+            let rec = recommendations[i % recommendations.length];
+            let initials = fn[0] + ln[0];
+
+            engineers.push({
+                name: `${fn} ${ln}`,
+                initials: initials,
+                stack: ts.name,
+                stackClass: ts.bg,
+                maturity: mat,
+                project: prj,
+                date: dt,
+                recommendation: rec
+            });
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            data.forEach(eng => {
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">${eng.initials}</span>
+                        <span>${eng.name}</span>
+                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 ${eng.stackClass} rounded-lg font-medium">${eng.stack}</span></td>
+                    <td class="py-4 px-6"><span class="font-bold">${eng.maturity}</span></td>
+                    <td class="py-4 px-6">${eng.project}</td>
+                    <td class="py-4 px-6 mono text-slate-500">${eng.date}</td>
+                    <td class="py-4 px-6"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-medium">${eng.recommendation}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        renderTable(engineers);
+
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const filtered = engineers.filter(eng => 
+                eng.name.toLowerCase().includes(filter) || 
+                eng.stack.toLowerCase().includes(filter) ||
+                eng.project.toLowerCase().includes(filter)
+            );
+            renderTable(filtered);
+        }
+
+        function runAiSimulation() {
+            const toast = document.getElementById('simulationToast');
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3500);
+        }
+
+        function openSkillUpskillingModal() {
+            alert("[AI Upskilling Plan]:\n1. To address the 12 FTE Distributed Systems deficit, the model recommends prioritizing 8 senior backend engineers for Rust/Go internal training.\n2. Estimated internal transition completion within 4 weeks, saving $120,000 in external recruitment & outsourcing costs.");
+        }
+    </script>
+</body>
+</html>
