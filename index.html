@@ -300,6 +300,7 @@
 
         <!-- TAB 3: Lifecycle & Transition Management -->
         <div id="contentLifecycle" class="space-y-8 hidden">
+            <!-- Lifecycle KPI Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="glass-card p-6 rounded-2xl shadow-sm">
                     <div class="flex items-center justify-between">
@@ -350,6 +351,7 @@
                 </div>
             </div>
 
+            <!-- Lifecycle & Stage-Gate Transition Tracking Table -->
             <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
@@ -395,6 +397,7 @@
     <script>
         lucide.createIcons();
 
+        // Tab Switching Logic
         function switchTab(tab) {
             const tabDemand = document.getElementById('tabDemand');
             const tabResource = document.getElementById('tabResource');
@@ -423,6 +426,7 @@
             }
         }
 
+        // Chart.js
         const ctx = document.getElementById('demandCapacityChart').getContext('2d');
         const demandCapacityChart = new Chart(ctx, {
             type: 'bar',
@@ -454,6 +458,7 @@
             }
         });
 
+        // 142 FTE Data Generation for Tab 1
         const firstNames = ["Alex", "Brian", "Chloe", "David", "Elena", "Frank", "Grace", "Herman", "Ivy", "Jack", "Kevin", "Linda", "Michael", "Nancy", "Oliver", "Peter", "Queen", "Ryan", "Sarah", "Tom"];
         const lastNames = ["K.", "L.", "W.", "T.", "S.", "M.", "G.", "H.", "I.", "J.", "Chen", "Wang", "Lee", "Zhang", "Lin", "Liu", "Wu", "Huang", "Davis", "Smith"];
         const techStacks = [
@@ -622,6 +627,7 @@
             renderResourceTable(filtered);
         }
 
+        // 修正後的 Lifecycle 篩選函數，確保正確過濾 lifecycleStaff 陣列
         function filterLifecycleTable() {
             const input = document.getElementById('searchLifecycleInput');
             const filter = input.value.toLowerCase();
