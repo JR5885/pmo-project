@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demand Forecasting & Capacity Planning Command Center</title>
+    <title>Demand Forecasting & Capacity Planning</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
@@ -34,15 +34,8 @@
                     <p class="text-xs text-slate-500">Singapore R&D Hub | Powered by Python, SQL & Claude Code</p>
                 </div>
             </div>
-            
-            <!-- Tab Navigation -->
-            <nav class="hidden md:flex space-x-2 bg-slate-100 p-1 rounded-xl">
-                <button onclick="switchTab('tab-capacity')" id="btn-tab-capacity" class="px-4 py-1.5 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm transition-all">Capacity Command Center</button>
-                <button onclick="switchTab('tab-executive')" id="btn-tab-executive" class="px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all">Executive Overview & PMO Core Framework</button>
-            </nav>
-
             <div class="flex items-center space-x-3">
-                <div class="hidden lg:flex items-center space-x-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full text-emerald-700 text-xs font-medium">
+                <div class="hidden md:flex items-center space-x-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full text-emerald-700 text-xs font-medium">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     <span>Allocation Accuracy: 96.8%</span>
                 </div>
@@ -52,19 +45,28 @@
                 </button>
             </div>
         </div>
-        <!-- Mobile Tab Bar -->
-        <div class="md:hidden flex border-t border-slate-200 bg-slate-50 px-4 py-2 space-x-2">
-            <button onclick="switchTab('tab-capacity')" id="btn-mobile-capacity" class="flex-1 py-1 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm">Capacity Center</button>
-            <button onclick="switchTab('tab-executive')" id="btn-mobile-executive" class="flex-1 py-1 text-xs font-semibold rounded-lg text-slate-600">PMO Framework</button>
-        </div>
     </header>
+
+    <!-- Navigation Tabs -->
+    <div class="bg-white border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8">
+            <button onclick="switchTab('demand')" id="tabDemand" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2">
+                <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                <span>Demand Forecasting & Capacity</span>
+            </button>
+            <button onclick="switchTab('resource')" id="tabResource" class="py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2">
+                <i data-lucide="users" class="w-4 h-4"></i>
+                <span>Resource Planning & Allocation</span>
+            </button>
+        </div>
+    </div>
 
     <!-- Main Container -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
-        <!-- TAB 1: Capacity Planning Command Center -->
-        <div id="tab-capacity" class="space-y-8">
-            <!-- KPI Grid with concrete metrics -->
+        <!-- TAB 1: Demand Forecasting & Capacity -->
+        <div id="contentDemand" class="space-y-8">
+            <!-- KPI Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="glass-card p-6 rounded-2xl shadow-sm">
                     <div class="flex items-center justify-between">
@@ -75,7 +77,7 @@
                         <div class="text-3xl font-bold text-slate-900 mono">96.8%</div>
                         <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+4.2% QoQ</span>
                     </div>
-                    <p class="mt-2 text-xs text-slate-500">Target >95.0% across all 4 R&D pods</p>
+                    <p class="mt-2 text-xs text-slate-500">Consistently maintained above 95% target</p>
                 </div>
 
                 <div class="glass-card p-6 rounded-2xl shadow-sm">
@@ -84,10 +86,10 @@
                         <span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="zap" class="w-5 h-5"></i></span>
                     </div>
                     <div class="mt-4 flex items-baseline justify-between">
-                        <div class="text-3xl font-bold text-slate-900 mono">40.0%</div>
-                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">Velocity</span>
+                        <div class="text-3xl font-bold text-slate-900 mono">40%</div>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">Agility</span>
                     </div>
-                    <p class="mt-2 text-xs text-slate-500">Decision cycle shortened from 10 to 6 days</p>
+                    <p class="mt-2 text-xs text-slate-500">Accelerated cross-functional decision making</p>
                 </div>
 
                 <div class="glass-card p-6 rounded-2xl shadow-sm">
@@ -96,22 +98,22 @@
                         <span class="p-2 bg-amber-50 text-amber-600 rounded-xl"><i data-lucide="trending-down" class="w-5 h-5"></i></span>
                     </div>
                     <div class="mt-4 flex items-baseline justify-between">
-                        <div class="text-3xl font-bold text-slate-900 mono">-$340,000</div>
-                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">-35% Budget</span>
+                        <div class="text-3xl font-bold text-slate-900 mono">-$340K</div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">-35% Cost</span>
                     </div>
-                    <p class="mt-2 text-xs text-slate-500">Saved via internal cross-skilling & mobility</p>
+                    <p class="mt-2 text-xs text-slate-500">Achieved via internal upskilling & mobility</p>
                 </div>
 
                 <div class="glass-card p-6 rounded-2xl shadow-sm">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Active R&D Workforce</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total R&D Workforce</span>
                         <span class="p-2 bg-blue-50 text-blue-600 rounded-xl"><i data-lucide="users" class="w-5 h-5"></i></span>
                     </div>
                     <div class="mt-4 flex items-baseline justify-between">
                         <div class="text-3xl font-bold text-slate-900 mono">142 <span class="text-sm font-normal text-slate-400">FTE</span></div>
-                        <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">100% Mapped</span>
+                        <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">4 Hubs</span>
                     </div>
-                    <p class="mt-2 text-xs text-slate-500">Engineers tracked in SQL capacity database</p>
+                    <p class="mt-2 text-xs text-slate-500">Singapore & Global R&D Hubs</p>
                 </div>
             </div>
 
@@ -121,7 +123,7 @@
                     <div class="flex items-center justify-between mb-4">
                         <div>
                             <h3 class="text-base font-bold text-slate-900">Future 4-Quarter Tech Demand vs. Current Capacity Forecast</h3>
-                            <p class="text-xs text-slate-500">Automated simulation of Sales pipeline and project roadmaps (FTE)</p>
+                            <p class="text-xs text-slate-500">Automated simulation of Sales pipeline and project roadmaps</p>
                         </div>
                         <div class="flex items-center space-x-3 text-xs">
                             <span class="flex items-center space-x-1"><span class="w-3 h-3 bg-indigo-600 rounded-full inline-block"></span><span>Demand FTE</span></span>
@@ -184,12 +186,12 @@
                 </div>
             </div>
 
-            <!-- Detailed Engineer Table (142 FTEs with real concrete records) -->
+            <!-- Detailed Engineer Table (142 FTEs) -->
             <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
                         <h3 class="text-base font-bold text-slate-900">Engineer Skill Maturity & Project Transition Schedule</h3>
-                        <p class="text-xs text-slate-500">Model tracking transition timelines and skill maturity for all 142 engineers (Live database records)</p>
+                        <p class="text-xs text-slate-500">Model tracking transition timelines and skill maturity for all 142 engineers</p>
                     </div>
                     <div class="flex items-center space-x-3 w-full sm:w-auto">
                         <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search engineer name or tech stack..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64">
@@ -215,80 +217,86 @@
             </div>
         </div>
 
-        <!-- TAB 2: Executive Overview & PMO Core Framework -->
-        <div id="tab-executive" class="space-y-8 hidden">
-            <!-- Story Header -->
-            <div class="glass-card p-8 rounded-3xl shadow-sm space-y-6">
-                <div class="border-b border-slate-100 pb-4">
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-semibold mb-3">
-                        <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
-                        <span>Executive Case Study | Singapore R&D Hub (500+ Workforce)</span>
+        <!-- TAB 2: Resource Planning & Allocation -->
+        <div id="contentResource" class="space-y-8 hidden">
+            <!-- Resource KPI Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Active Engineers Visible</span>
+                        <span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="users" class="w-5 h-5"></i></span>
                     </div>
-                    <h2 class="text-2xl font-bold text-slate-900">Dynamic Cross-Functional Deployment & Capacity Rebalancing</h2>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">142 <span class="text-sm font-normal text-slate-400">FTE</span></div>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">100% Visibility</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Zero information silos across departments</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                    <!-- Context -->
-                    <div class="space-y-2 bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                        <div class="flex items-center space-x-2 text-indigo-600 font-bold">
-                            <i data-lucide="alert-circle" class="w-4 h-4"></i>
-                            <h3>Context & Challenge</h3>
-                        </div>
-                        <p class="text-slate-600 leading-relaxed text-xs">
-                            At BM Singapore as Sr. HRBP & PMO during core product line revamps across 500+ cross-border engineers, severe capacity bottlenecks and idle gaps occurred simultaneously. Certain delivery lines faced architectural gridlock and burnout, while completed project pods sat idle awaiting next-phase alignment, risking product launch delays and severe resource waste.
-                        </p>
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Average Workload Rate</span>
+                        <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><i data-lucide="activity" class="w-5 h-5"></i></span>
                     </div>
-
-                    <!-- Action -->
-                    <div class="space-y-2 bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                        <div class="flex items-center space-x-2 text-indigo-600 font-bold">
-                            <i data-lucide="zap" class="w-4 h-4"></i>
-                            <h3>Strategic Action</h3>
-                        </div>
-                        <ul class="text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed text-xs">
-                            <li><strong>Tech Debt & Gap Auditing</strong>: Deep alignment with Delivery Leads to map module requirements and milestone timelines.</li>
-                            <li><strong>Real-time Visibility Dashboard</strong>: Built with Python, SQL & Claude Code to make engineer skill tags, current loads, and idle windows fully transparent.</li>
-                            <li><strong>Dynamic Reassignment</strong>: Rapidly redeployed waiting engineers to high-priority lines, keeping allocation accuracy above 95% purely via internal mobility.</li>
-                        </ul>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">88.4%</div>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Optimal</span>
                     </div>
-
-                    <!-- Result -->
-                    <div class="space-y-2 bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                        <div class="flex items-center space-x-2 text-emerald-600 font-bold">
-                            <i data-lucide="trending-up" class="w-4 h-4"></i>
-                            <h3>Business Impact</h3>
-                        </div>
-                        <ul class="text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed text-xs">
-                            <li>Completely eliminated headcount bottlenecks and idle gaps, maximizing resource utilization without headcounter expansion.</li>
-                            <li>Accelerated cross-functional strategic decision-making and scheduling cycles by <strong>40%</strong>.</li>
-                        </ul>
-                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Balanced project load across all teams</p>
                 </div>
 
-                <!-- RACI Matrix -->
-                <div class="pt-4 border-t border-slate-100">
-                    <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center space-x-2">
-                        <i data-lucide="users" class="w-4 h-4 text-indigo-600"></i>
-                        <span>RACI Governance Matrix</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-                        <div class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">
-                            <span class="font-bold text-indigo-700 block mb-1">Responsible (R)</span>
-                            <span class="text-slate-600">PMO & Resource Manager (Model building, data analytics, dashboard publishing).</span>
-                        </div>
-                        <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-100">
-                            <span class="font-bold text-emerald-700 block mb-1">Accountable (A)</span>
-                            <span class="text-slate-600">Business Leaders & Delivery Leads (Ultimate accountability for delivery schedule and capacity allocation).</span>
-                        </div>
-                        <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-100">
-                            <span class="font-bold text-amber-700 block mb-1">Consulted (C)</span>
-                            <span class="text-slate-600">Sales & Tech Leads (Providing business orders, product roadmaps, and technical specifications).</span>
-                        </div>
-                        <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100">
-                            <span class="font-bold text-blue-700 block mb-1">Informed (I)</span>
-                            <span class="text-slate-600">Engineering Teams & Regional Directors (Receiving schedule notifications and skill development targets).</span>
-                        </div>
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Engineers in Bench / Gap</span>
+                        <span class="p-2 bg-amber-50 text-amber-600 rounded-xl"><i data-lucide="clock" class="w-5 h-5"></i></span>
                     </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">14 <span class="text-sm font-normal text-slate-400">FTE</span></div>
+                        <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">Ready to Deploy</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Transitioning to high-priority lines</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Internal Mobility Rate</span>
+                        <span class="p-2 bg-purple-50 text-purple-600 rounded-xl"><i data-lucide="shuffle" class="w-5 h-5"></i></span>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-bold text-slate-900 mono">94.2%</div>
+                        <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">Internal First</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">Crisis resolved via internal re-deployment</p>
+                </div>
+            </div>
+
+            <!-- Resource Visibility & Dynamic Allocation Matrix -->
+            <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">Dynamic Resource Allocation & Bench Visibility Dashboard</h3>
+                        <p class="text-xs text-slate-500">Tracking skill tags, current project workload rates, and gap periods for rapid deployment</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto">
+                        <input type="text" id="searchResourceInput" onkeyup="filterResourceTable()" placeholder="Search engineer, skill tag, or status..." class="px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64">
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table id="resourceTable" class="w-full text-left border-collapse text-xs">
+                        <thead class="sticky top-0 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider z-10">
+                            <tr>
+                                <th class="py-3 px-6">Engineer</th>
+                                <th class="py-3 px-6">Skill Tags</th>
+                                <th class="py-3 px-6">Current Workload Rate</th>
+                                <th class="py-3 px-6">Status / Gap Period</th>
+                                <th class="py-3 px-6">Dynamic Reallocation Target</th>
+                                <th class="py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resourceTableBody" class="divide-y divide-slate-100 text-slate-700">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -309,32 +317,22 @@
         lucide.createIcons();
 
         // Tab Switching Logic
-        function switchTab(tabId) {
-            const tabCapacity = document.getElementById('tab-capacity');
-            const tabExecutive = document.getElementById('tab-executive');
-            const btnCapacity = document.getElementById('btn-tab-capacity');
-            const btnExecutive = document.getElementById('btn-tab-executive');
-            const btnMobCapacity = document.getElementById('btn-mobile-capacity');
-            const btnMobExecutive = document.getElementById('btn-mobile-executive');
+        function switchTab(tab) {
+            const tabDemand = document.getElementById('tabDemand');
+            const tabResource = document.getElementById('tabResource');
+            const contentDemand = document.getElementById('contentDemand');
+            const contentResource = document.getElementById('contentResource');
 
-            if (tabId === 'tab-capacity') {
-                tabCapacity.classList.remove('hidden');
-                tabExecutive.classList.add('hidden');
-                
-                btnCapacity.className = "px-4 py-1.5 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm transition-all";
-                btnExecutive.className = "px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all";
-                
-                btnMobCapacity.className = "flex-1 py-1 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm";
-                btnMobExecutive.className = "flex-1 py-1 text-xs font-semibold rounded-lg text-slate-600";
+            if (tab === 'demand') {
+                tabDemand.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2";
+                tabResource.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2";
+                contentDemand.classList.remove('hidden');
+                contentResource.classList.add('hidden');
             } else {
-                tabCapacity.classList.add('hidden');
-                tabExecutive.classList.remove('hidden');
-                
-                btnExecutive.className = "px-4 py-1.5 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm transition-all";
-                btnCapacity.className = "px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all";
-                
-                btnMobExecutive.className = "flex-1 py-1 text-xs font-semibold rounded-lg bg-white text-indigo-600 shadow-sm";
-                btnMobCapacity.className = "flex-1 py-1 text-xs font-semibold rounded-lg text-slate-600";
+                tabResource.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-indigo-600 text-indigo-600 flex items-center space-x-2";
+                tabDemand.className = "py-4 px-1 border-b-2 font-semibold text-sm transition-colors border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center space-x-2";
+                contentResource.classList.remove('hidden');
+                contentDemand.classList.add('hidden');
             }
         }
 
@@ -370,7 +368,7 @@
             }
         });
 
-        // 142 FTE Data Generation with actual concrete records
+        // 142 FTE Data Generation for Tab 1
         const firstNames = ["Alex", "Brian", "Chloe", "David", "Elena", "Frank", "Grace", "Herman", "Ivy", "Jack", "Kevin", "Linda", "Michael", "Nancy", "Oliver", "Peter", "Queen", "Ryan", "Sarah", "Tom"];
         const lastNames = ["K.", "L.", "W.", "T.", "S.", "M.", "G.", "H.", "I.", "J.", "Chen", "Wang", "Lee", "Zhang", "Lin", "Liu", "Wu", "Huang", "Davis", "Smith"];
         const techStacks = [
@@ -405,7 +403,10 @@
                 maturity: mat,
                 project: prj,
                 date: dt,
-                recommendation: rec
+                recommendation: rec,
+                workload: `${Math.floor(75 + (i * 13) % 25)}%`,
+                status: i % 10 === 0 ? "Bench / In Gap" : "Active Assigned",
+                target: i % 10 === 0 ? "High-Priority Delivery Line" : "Current Stream"
             });
         }
 
@@ -430,7 +431,37 @@
             });
         }
 
+        function renderResourceTable(data) {
+            const tbody = document.getElementById('resourceTableBody');
+            tbody.innerHTML = '';
+            data.forEach(eng => {
+                let statusBadge = eng.status.includes("Bench") 
+                    ? '<span class="px-2 py-1 bg-amber-50 text-amber-700 rounded-full font-semibold">Bench / Gap Period</span>' 
+                    : '<span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">Active Assigned</span>';
+                
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-semibold flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">${eng.initials}</span>
+                        <span>${eng.name}</span>
+                    </td>
+                    <td class="py-4 px-6"><span class="px-2 py-1 ${eng.stackClass} rounded-lg font-medium">${eng.stack}</span></td>
+                    <td class="py-4 px-6"><span class="mono font-bold text-slate-700">${eng.workload}</span></td>
+                    <td class="py-4 px-6">${statusBadge}</td>
+                    <td class="py-4 px-6"><span class="font-medium text-indigo-600">${eng.target}</span></td>
+                    <td class="py-4 px-6">
+                        <button onclick="deployEngineer('${eng.name}')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-medium transition-all">
+                            Deploy Now
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
         renderTable(engineers);
+        renderResourceTable(engineers);
 
         function filterTable() {
             const input = document.getElementById('searchInput');
@@ -443,11 +474,26 @@
             renderTable(filtered);
         }
 
+        function filterResourceTable() {
+            const input = document.getElementById('searchResourceInput');
+            const filter = input.value.toLowerCase();
+            const filtered = engineers.filter(eng => 
+                eng.name.toLowerCase().includes(filter) || 
+                eng.stack.toLowerCase().includes(filter) ||
+                eng.status.toLowerCase().includes(filter)
+            );
+            renderResourceTable(filtered);
+        }
+
+        function deployEngineer(name) {
+            alert(`[Dynamic Reallocation Success]: ${name} has been successfully re-deployed to high-priority delivery stream with zero down-time.`);
+        }
+
         function runAiSimulation() {
             const toast = document.getElementById('simulationToast');
             toast.classList.remove('translate-y-32', 'opacity-0');
             setTimeout(() => {
-                toast.classList.add('tab-capacity', 'translate-y-32', 'opacity-0');
+                toast.classList.add('translate-y-32', 'opacity-0');
             }, 3500);
         }
 
